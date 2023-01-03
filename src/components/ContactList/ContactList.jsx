@@ -5,7 +5,7 @@ import { removeContact } from 'Redux/contactSlice';
 import { getContacts } from 'Redux/contactSlice';
 import { getFilters } from 'Redux/filterSlice';
 
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export const ContactList = () => {
   const dispatch = useDispatch();

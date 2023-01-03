@@ -10,7 +10,7 @@ const initialState = [
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-const contactSlice = createSlice({
+export const contactSlice = createSlice({
   name: 'contacts',
   initialState,
   reducers: {
@@ -27,16 +27,16 @@ const contactSlice = createSlice({
   },
 });
 
-const persistConfig = {
-  key: 'contacts',
-  storage,
-  whitelist: ['contacts'],
-};
+// const persistConfig = {
+//   key: 'contacts',
+//   storage,
+//   whitelist: ['contacts'],
+// };
 
-export const contactsReducer = persistReducer(
-  persistConfig,
-  contactSlice.reducer
-);
+// export const contactsReducer = persistReducer(
+//   persistConfig,
+//   contactSlice.reducer
+// );
 
 export const { addContact, removeContact } = contactSlice.actions;
 
