@@ -28,7 +28,7 @@ const contactSlice = createSlice({
 });
 
 const persistConfig = {
-  key: 'root',
+  key: 'contacts',
   storage,
   whitelist: ['contacts'],
 };
