@@ -1,11 +1,15 @@
+import { nanoid } from '@reduxjs/toolkit';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'Redux/contactSlice';
+import { getContacts } from 'Redux/contactSlice';
 
 import { Form, Input, Label, Button } from './ContactForm.styled';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -25,13 +29,22 @@ export const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(addContact({ name, number }));
-    resetForm();
-  };
+    const addedContact = event.target.name.value;
 
-  const resetForm = () => {
-    setName('');
-    setNumber('');
+    if (
+      contacts.find(
+        contact => contact.name.toLowerCase === addedContact.toLowerCase
+      )
+    ) {
+      Report.warning('Warning', `${addedContact} already exists`, 'Okay');
+
+      event.target.reset();
+      return;
+    }
+
+    const id = nanoid(4);
+    dispatch(addContact({ name, number, id }));
+    event.target.reset();
   };
 
   return (
