@@ -2,16 +2,27 @@ import { Box, Contact, Button } from './ContactList.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { removeContact } from 'Redux/contactSlice';
+import { getContacts } from 'Redux/contactSlice';
+import { getFilters } from 'Redux/filterSlice';
 
 // import PropTypes from 'prop-types';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
-  console.log(contacts);
+  const contacts = useSelector(getContacts);
+  const filters = useSelector(getFilters);
+
+  // console.log(contacts);
+
+  const filterContacts = () => {
+    return contacts.filter(contact =>
+      contact.name.toLocaleLowerCase().includes(filters.toLocaleLowerCase())
+    );
+  };
+
   return (
     <Box>
-      {contacts.map(({ id, name, number }) => (
+      {filterContacts().map(({ id, name, number }) => (
         <Contact key={id}>
           {name}: {number}
           <Button type="button" onClick={() => dispatch(removeContact(id))}>
@@ -22,30 +33,3 @@ export const ContactList = () => {
     </Box>
   );
 };
-
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ),
-//   onDelete: PropTypes.func.isRequired,
-// };
-
-// export const TaskList = () => {
-//   const tasks = useSelector(getTasks);
-//   const statusFilter = useSelector(getStatusFilter);
-//   const visibleTasks = getVisibleTasks(tasks, statusFilter);
-
-//   return (
-//     <ul className={css.list}>
-//       {visibleTasks.map(task => (
-//         <li className={css.listItem} key={task.id}>
-//           <Task task={task} />
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// };

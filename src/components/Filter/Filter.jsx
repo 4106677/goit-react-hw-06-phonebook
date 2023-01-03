@@ -1,10 +1,18 @@
 import { Input, Title } from './Filter.styled';
+import { useDispatch } from 'react-redux';
+import { setFiltered } from 'Redux/filterSlice';
 
-const Filter = ({ value, onChange }) => (
-  <div>
-    <Title>Find contacts by name</Title>
-    <Input type="text" name="filter" value={value} onChange={onChange} />
-  </div>
-);
+export const Filter = () => {
+  const dispatch = useDispatch();
 
-export default Filter;
+  return (
+    <div>
+      <Title>Find contacts by name</Title>
+      <Input
+        type="text"
+        name="filter"
+        onChange={e => dispatch(setFiltered(e.target.value))}
+      />
+    </div>
+  );
+};
