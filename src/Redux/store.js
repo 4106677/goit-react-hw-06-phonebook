@@ -9,9 +9,6 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-// import { filtersReducer } from './filterSlice';
-// import { contactsReducer } from './contactSlice';
-// import { filtersSlice } from './filterSlice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { contactSlice } from './contactSlice';
