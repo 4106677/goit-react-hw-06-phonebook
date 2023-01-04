@@ -10,8 +10,6 @@ export const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filters = useSelector(getFilters);
 
-  // console.log(contacts);
-
   const filterContacts = () => {
     return contacts.filter(contact =>
       contact.name.toLocaleLowerCase().includes(filters.toLocaleLowerCase())

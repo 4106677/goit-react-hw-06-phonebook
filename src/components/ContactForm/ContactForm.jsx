@@ -33,7 +33,7 @@ export const ContactForm = () => {
 
     if (
       contacts.find(
-        contact => contact.name.toLowerCase === addedContact.toLowerCase
+        contact => contact.name.toLowerCase() === addedContact.toLowerCase()
       )
     ) {
       Report.warning('Warning', `${addedContact} already exists`, 'Okay');
